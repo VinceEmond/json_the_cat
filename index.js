@@ -1,13 +1,14 @@
 // index.js
 
 const SEARCHARG = process.argv.slice(2);
-const WEBSITE = "https://api.thecatapi.com/v1/breeds/search?q=";
-const {getBreedDescription} = require("./breedFetcher");
 
-getBreedDescription(WEBSITE + SEARCHARG,(error, description) =>{
+const {fetchBreedDescription} = require("./breedFetcher");
+
+fetchBreedDescription(SEARCHARG,(error, description) =>{
   if (error) {
-    console.log("Error: \n\n", error);
-    console.log("\n");
+    console.log('Error fetch details:', error);
+  } else if (description === null) {
+    console.log(`A description could not be found.`);
   } else {
     console.log(description);
   }
